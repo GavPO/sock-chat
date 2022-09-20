@@ -1,1 +1,1 @@
-# sock-chat
+# Project 2 Boilerplate
