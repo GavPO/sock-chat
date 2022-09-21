@@ -24,12 +24,13 @@
     "helmet": "^6.0.0",
     "morgan": "^1.10.0",
     "mysql2": "^2.2.5",
-    "sequelize": "^6.3.5"
+    "sequelize": "^6.3.5",
+    "socket.io": "^4.5.2"
   },
   "devDependencies": {
-    "jest": "^29.0.3",
     "eslint": "^7.12.1",
     "eslint-config-prettier": "^6.15.0",
+    "jest": "^29.0.3",
     "nodemon": "^2.0.20",
     "prettier": "^2.1.2"
   }
