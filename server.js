@@ -57,7 +57,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes);
 
-io.on('connection', (socket) => {
+io.on('connection', () => {
   console.log('a user connected');
 });
 
