@@ -57,6 +57,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes);
 
+io.on('connection', () => {
+  console.log('a user connected');
+});
+
 sequelize.sync({ force: !IS_PROD }).then(() => {
   httpServer.listen(PORT, () => console.log(`Now listening on port: ${PORT}`));
 });
