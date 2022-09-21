@@ -1,3 +1,3 @@
-DROP DATABASE IF EXISTS project_2_db;
+DROP DATABASE IF EXISTS sock_chat_db;
 
-CREATE DATABASE project_2_db;
+CREATE DATABASE sock_chat_db;

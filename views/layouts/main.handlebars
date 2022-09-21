@@ -40,8 +40,7 @@
   {{/if}}
 
   <script src="/socket.io/socket.io.js"></script>
-  <script>
-    var socket = io();
+  <script> var socket = io(); 
     io.on('connection', (socket) => {
       console.log('a user connected');
       socket.on('disconnect', () => {
