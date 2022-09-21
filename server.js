@@ -19,8 +19,8 @@ const IS_PROD = process.env.NODE_ENV === 'prod';
 // Set up Handlebars.js engine with custom helpers
 const hbs = exphbs.create({ helpers });
 
-const { createServer } = require("http");
-const { Server } = require("socket.io");
+const { createServer } = require('http');
+const { Server } = require('socket.io');
 const httpServer = createServer(app);
 const io = new Server(httpServer, { /* options */ });
 
