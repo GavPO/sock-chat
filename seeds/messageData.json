@@ -1,0 +1,22 @@
+[
+  {
+    "content": "Marianne was here!",
+    "user_id": 1,
+    "room_id": 1
+  },
+  {
+    "content": "Victor was here!",
+    "user_id": 2,
+    "room_id": 1
+  },
+  {
+    "content": "Lanay was here!",
+    "user_id": 3,
+    "room_id": 2
+  },
+  {
+    "content": "Gavin was here!",
+    "user_id": 4,
+    "room_id": 2
+  }
+]
