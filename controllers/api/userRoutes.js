@@ -5,9 +5,13 @@ router.get('/', async (req, res) => {
   try {
     const userData = await User.findAll({
       attributes: ['username', 'id'],
+      include: [{
+        model: Participant, include: [ Chatroom ]
+      }]
     });
     res.status(200).json(userData);
   } catch (err) {
+    console.error(err);
     res.status(500).json(err);
   }
 });
@@ -16,7 +20,13 @@ router.get('/:id', async (req, res) => {
   try {
     const userData = await User.findByPk(req.params.id, {
       attributes: ['username'],
-      include: [{ model: Chatroom, through: Participant }, { model: Message }],
+      include: [
+        {
+          model: Chatroom,
+          through: Participant,
+        },
+        { model: Message },
+      ],
     });
     res.status(200).json(userData);
   } catch (err) {

@@ -3,8 +3,8 @@ const { User, Chatroom, Message, Participant } = require('../../models');
 
 router.get('/', async (req, res) => {
   try {
-    const userData = await Chatroom.findAll();
-    res.status(200).json(userData);
+    const chatRoomData = await Chatroom.findAll();
+    res.status(200).json(chatRoomData);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -12,14 +12,16 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   try {
-    const userData = await Chatroom.findByPk(req.params.id, {
+    const chatRoomData = await Chatroom.findByPk(req.params.id, {
       attributes: ['room_name'],
-      include: [
-        { User, through: Participant },
-        { include: Message, through: User },
-      ],
+      include: [{
+        model: User, through: Participant
+      }, {
+        model: Message,
+        attributes: ['content'],
+      }]
     });
-    res.status(200).json(userData);
+    res.status(200).json(chatRoomData);
   } catch (err) {
     res.status(500).json(err);
   }

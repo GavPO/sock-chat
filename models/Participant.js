@@ -23,7 +23,7 @@ Participant.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'chat',
+        model: 'chatroom',
         key: 'id',
       },
     },
