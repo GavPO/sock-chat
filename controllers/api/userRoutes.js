@@ -7,21 +7,21 @@ router.get('/', async (req, res) => {
       attributes: ['username', 'id'],
     });
     res.status(200).json(userData);
-  } catch(err) {
+  } catch (err) {
     res.status(500).json(err);
-  };
+  }
 });
 
 router.get('/:id', async (req, res) => {
   try {
     const userData = await User.findByPk(req.params.id, {
       attributes: ['username'],
-      include: [{model: Chatroom, through: Participant}],
+      include: [{ model: Chatroom, through: Participant }, { model: Message }],
     });
     res.status(200).json(userData);
-  } catch(err) {
+  } catch (err) {
     res.status(500).json(err);
-  };
+  }
 });
 
 router.post('/', async (req, res) => {
@@ -65,7 +65,6 @@ router.post('/login', async (req, res) => {
       // CHANGE THIS REDIRECT TO WHERE YOU WANT THE USER TO GO
       res.status(200).redirect('/logged_in_homepage');
     });
-
   } catch (err) {
     res.status(400).json(err);
   }
