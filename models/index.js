@@ -34,4 +34,4 @@ Message.belongsTo(Chatroom, {
   foreignKey: 'room_id',
 });
 
-module.exports = { User };
+module.exports = { User, Chatroom, Message, Participant };
