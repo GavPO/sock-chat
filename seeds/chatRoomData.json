@@ -4,5 +4,13 @@
   },
   {
     "room_name": "Socks"
+  },
+  {
+    "room_name": "M&G",
+    "is_private": true
+  },
+  {
+    "room_name": "V&G",
+    "is_private": true
   }
 ]

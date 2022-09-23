@@ -15,6 +15,10 @@ Chatroom.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    is_private: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+    },
   },
   {
     sequelize,
