@@ -1,8 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Chatroom extends Model {
-}
+class Chatroom extends Model {}
 
 Chatroom.init(
   {
@@ -13,8 +12,8 @@ Chatroom.init(
       autoIncrement: true,
     },
     room_name: {
-        type: DataTypes.STRING,
-        allowNull: false,
+      type: DataTypes.STRING,
+      allowNull: false,
     },
   },
   {
