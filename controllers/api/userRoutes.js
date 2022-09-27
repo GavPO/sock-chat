@@ -5,9 +5,15 @@ router.get('/', async (req, res) => {
   try {
     const userData = await User.findAll({
       attributes: ['username', 'id'],
-      include: [{
-        model: Participant, include: [ Chatroom ]
-      }]
+      include: [
+        {
+          model: Participant,
+          include: [Chatroom],
+        },
+        {
+          model: Message,
+        },
+      ],
     });
     res.status(200).json(userData);
   } catch (err) {
@@ -22,14 +28,17 @@ router.get('/:id', async (req, res) => {
       attributes: ['username'],
       include: [
         {
-          model: Chatroom,
-          through: Participant,
+          model: Participant,
+          include: [Chatroom],
         },
-        { model: Message },
+        {
+          model: Message,
+        },
       ],
     });
     res.status(200).json(userData);
   } catch (err) {
+    console.error(err);
     res.status(500).json(err);
   }
 });
