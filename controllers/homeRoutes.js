@@ -21,4 +21,12 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
+router.get('/logged_in_homepage', async (req, res) => {
+  const allChatRooms = await Chatroom.findAll({ raw: true });
+  res.render('homepage', {
+    chatRoom: allChatRooms,
+    logged_in: req.session.logged_in,
+  });
+});
+
 module.exports = router;
