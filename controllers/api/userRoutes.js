@@ -85,6 +85,7 @@ router.post('/login', async (req, res) => {
       res.status(200).redirect('/logged_in_homepage');
     });
   } catch (err) {
+    console.error(err);
     res.status(400).json(err);
   }
 });
