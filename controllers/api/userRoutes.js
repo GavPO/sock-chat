@@ -1,5 +1,47 @@
 const router = require('express').Router();
-const { User } = require('../../models');
+const { User, Chatroom, Message, Participant } = require('../../models');
+
+router.get('/', async (req, res) => {
+  try {
+    const userData = await User.findAll({
+      attributes: ['username', 'id'],
+      include: [
+        {
+          model: Participant,
+          include: [Chatroom],
+        },
+        {
+          model: Message,
+        },
+      ],
+    });
+    res.status(200).json(userData);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json(err);
+  }
+});
+
+router.get('/:id', async (req, res) => {
+  try {
+    const userData = await User.findByPk(req.params.id, {
+      attributes: ['username'],
+      include: [
+        {
+          model: Participant,
+          include: [Chatroom],
+        },
+        {
+          model: Message,
+        },
+      ],
+    });
+    res.status(200).json(userData);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json(err);
+  }
+});
 
 router.post('/', async (req, res) => {
   try {
@@ -18,9 +60,8 @@ router.post('/', async (req, res) => {
 
 router.post('/login', async (req, res) => {
   try {
-    const userData = await User.findOne({
-      where: { username: req.body.username },
-    });
+
+    const userData = await User.findOne({ where: { username: req.body.username } })
 
     if (!userData) {
       res
