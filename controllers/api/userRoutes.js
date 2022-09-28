@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { User, Chatroom, Message, Participant } = require('../../models');
 
-router.get('/', async (req, res) => {
+router.get('/', async (_req, res) => {
   try {
     const userData = await User.findAll({
       attributes: ['username', 'id'],
@@ -45,14 +45,20 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    const userData = await User.create(req.body);
+    const userCheck = await User.findOne({
+      where: { username: req.body.username },
+    });
+    if (userCheck) {
+      res.status(400).json({ message: 'Username taken, please try again!' });
+      return;
+    }
+    const newUser = await User.create(req.body);
 
     req.session.save(() => {
-      req.session.user_id = userData.id;
+      req.session.user_id = newUser.id;
       req.session.logged_in = true;
-
-      res.status(200).json(userData);
     });
+    res.status(200).redirect('/logged_in_homepage');
   } catch (err) {
     res.status(400).json(err);
   }
@@ -60,7 +66,9 @@ router.post('/', async (req, res) => {
 
 router.post('/login', async (req, res) => {
   try {
-    const userData = await User.findOne({ where: { username: req.body.username } });
+    const userData = await User.findOne({
+      where: { username: req.body.username },
+    });
 
     if (!userData) {
       res
