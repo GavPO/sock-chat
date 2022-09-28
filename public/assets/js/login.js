@@ -36,7 +36,7 @@ const signupFormHandler = async (event) => {
     });
 
     if (response.ok) {
-      document.location.replace('/');
+      document.location.replace('/logged_in_homepage');
     } else {
       console.log(response);
     }
