@@ -1,6 +1,11 @@
-body {
-  background-image: url(./socks/background.jpg);
-}
-h1 a {
+header {
   display: flex;
+  color: blue;
+  height: 200px;
+}
+header h1 {
+  font-size: 40 px;
+  padding: 5px;
+  margin-left: 10px;
+  justify-content: ;
 }
