@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { User, Chatroom, Message, Participant } = require('../../models');
 
+//Get rooms
 router.get('/', async (req, res) => {
   try {
     const chatRoomData = await Chatroom.findAll();
@@ -10,6 +11,7 @@ router.get('/', async (req, res) => {
   }
 });
 
+//Get messages and participants in a room
 router.get('/:id', async (req, res) => {
   try {
     const chatRoomData = await Chatroom.findByPk(req.params.id, {
@@ -31,10 +33,11 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+//Create new room
 router.post('/', async (req, res) => {
   try {
     const chatRoomData = await Chatroom.create({
-      chatRoom_name: req.body.chatRoom_title,
+      room_name: req.body.room_name,
     });
     res.status(200).json(chatRoomData);
   } catch (err) {
@@ -43,6 +46,7 @@ router.post('/', async (req, res) => {
   }
 });
 
+//Delete room
 router.delete('/:id', async (req, res) => {
   try {
     const chatRoomData = await Chatroom.destroy({

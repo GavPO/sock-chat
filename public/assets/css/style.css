@@ -1,0 +1,6 @@
+body {
+  background-image: url(./socks/background.jpg);
+}
+h1 a {
+  display: flex;
+}
