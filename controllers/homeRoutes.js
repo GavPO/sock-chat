@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { Chatroom } = require('../models');
-const withAuth = require('../utils/auth');
+// const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
   // Change this to where you app should go

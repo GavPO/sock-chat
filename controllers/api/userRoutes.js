@@ -22,7 +22,6 @@ router.get('/', async (_req, res) => {
   }
 });
 
-
 router.get('/:id', async (req, res) => {
   try {
     const userData = await User.findByPk(req.params.id, {
@@ -50,10 +49,8 @@ router.post('/', async (req, res) => {
       where: { username: req.body.username },
     });
     if (userCheck) {
-      res
-      .status(400)
-      .json({ message: 'Username taken, please try again!' });
-    return;
+      res.status(400).json({ message: 'Username taken, please try again!' });
+      return;
     }
     const newUser = await User.create(req.body);
 
