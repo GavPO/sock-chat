@@ -78,6 +78,8 @@ router.post('/id', async (req, res) => {
     console.log(chatRoomData);
     res.status(200).json(chatRoomData);
   } catch (err) {
+  }
+});
   
 //Create new room
 router.post('/', async (req, res) => {
