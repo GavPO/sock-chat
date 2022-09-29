@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Chatroom } = require('../models');
+const { Chatroom, Participant, User, Message } = require('../models');
 // const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
@@ -56,8 +56,25 @@ router.get('/logged_in_homepage', async (req, res) => {
 router.get('/chatroom/:id', async (req, res) => {
   try {
     const roomID = req.params.id;
-    const chatRoom = await Chatroom.findByPk(roomID, { raw: true, nest: true });
-    console.log(chatRoom);
+    const chatRoom = await Chatroom.findByPk(roomID, {
+      raw: true,
+      include: [
+        {
+          model: Participant,
+          include: [
+            {
+              model: User,
+              attributes: { exclude: ['password'] },
+            },
+          ],
+        },
+        {
+          model: Message,
+          attributes: ['content'],
+        },
+      ],
+    });
+    console.log(chatRoom, 'home route');
     res.render('chatroom', {
       chatRoom,
       logged_in: req.session.logged_in,
