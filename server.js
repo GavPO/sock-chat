@@ -22,7 +22,9 @@ const hbs = exphbs.create({ helpers });
 const { createServer } = require('http');
 const { Server } = require('socket.io');
 const httpServer = createServer(app);
-const io = new Server(httpServer, { /* options */ });
+const io = new Server(httpServer, {
+  /* options */
+});
 
 const sess = {
   secret: process.env.SESSION_SECRET,
@@ -35,8 +37,8 @@ const sess = {
   resave: false,
   saveUninitialized: true,
   store: new SequelizeStore({
-    db: sequelize
-  })
+    db: sequelize,
+  }),
 };
 
 app.use(session(sess));
@@ -47,7 +49,7 @@ app.set('view engine', 'handlebars');
 
 app.use(
   helmet({
-    contentSecurityPolicy: false
+    contentSecurityPolicy: false,
   })
 );
 app.use(morgan('tiny'));
