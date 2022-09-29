@@ -58,7 +58,6 @@ router.get('/:id', async (req, res) => {
 router.post('/id', async (req, res) => {
   try {
     const chatRoomData = await Chatroom.findByPk(req.body.id, {
-      nest: true,
       raw: true,
       include: [
         {
@@ -75,7 +74,7 @@ router.post('/id', async (req, res) => {
         },
       ],
     });
-    console.log(chatRoomData);
+    console.log(chatRoomData, 'chat route');
     res.status(200).json(chatRoomData);
   } catch (err) {
     res.status(500).json(err);
