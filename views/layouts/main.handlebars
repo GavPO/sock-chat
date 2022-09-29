@@ -3,16 +3,19 @@
   <head>
     <meta charset='UTF-8' />
     <meta name='viewport' content='width=device-width, initial-scale=1.0' />
-    <title>Pair of Socks</title>
-    <link rel='stylesheet' href='../../css/reset.css' />
-    <link rel='stylesheet' href='../../css/style.css' />
+    <title>Knock Your Socks Off</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+    <link rel='stylesheet' href='/assets/css/reset.css' />
+    <link rel='stylesheet' href='/assets/css/style.css' />
   </head>
 
   <body>
-    <div class='flex-column justify-space-around'>
-      <header class='display-flex justify-space-between align-center p-2'>
+    <header>
+        <img src="../assets/socks/blackground.jpg" alt="white striped 80s sock on black background" class="blackground"</img>
         <h1>
-          <a href='/'>Sock Chat</a>
+          <a href='/' class="title">Sock Chat</a>
         </h1>
         <nav>
           <!-- Conditionally render login or logout links -->
@@ -21,7 +24,7 @@
             |
             <button class='no-button' id='logout'>Log out</button>
           {{else}}
-            <a href='/login'>Log in</a>
+            <a href='/login'>Sock it to me! (Log in)</a>
           {{/if}}
         </nav>
       </header>
@@ -32,7 +35,7 @@
       <footer>
 
       </footer>
-    </div>
+    
 
     <!-- Render script for logged in users only -->
     {{#if logged_in}}
