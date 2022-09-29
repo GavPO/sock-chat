@@ -78,6 +78,7 @@ router.post('/id', async (req, res) => {
     console.log(chatRoomData);
     res.status(200).json(chatRoomData);
   } catch (err) {
+    res.status(500).json(err)
   }
 });
   
