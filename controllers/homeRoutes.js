@@ -55,9 +55,9 @@ router.get('/logged_in_homepage', async (req, res) => {
 
 router.get('/chatroom/:id', async (req, res) => {
   try {
-    const roomID = req.params.id
-    const chatRoom = await Chatroom.findByPk( roomID, {raw: true, nest: true} );
-    console.log(chatRoom)
+    const roomID = req.params.id;
+    const chatRoom = await Chatroom.findByPk(roomID, { raw: true, nest: true });
+    console.log(chatRoom);
     res.render('chatroom', {
       chatRoom,
       logged_in: req.session.logged_in,
