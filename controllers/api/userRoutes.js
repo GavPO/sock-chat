@@ -1,13 +1,19 @@
 const router = require('express').Router();
 const { User, Chatroom, Message, Participant } = require('../../models');
 
-router.get('/', async (req, res) => {
+router.get('/', async (_req, res) => {
   try {
     const userData = await User.findAll({
       attributes: ['username', 'id'],
-      include: [{
-        model: Participant, include: [ Chatroom ]
-      }]
+      include: [
+        {
+          model: Participant,
+          include: [Chatroom],
+        },
+        {
+          model: Message,
+        },
+      ],
     });
     res.status(200).json(userData);
   } catch (err) {
@@ -22,28 +28,37 @@ router.get('/:id', async (req, res) => {
       attributes: ['username'],
       include: [
         {
-          model: Chatroom,
-          through: Participant,
+          model: Participant,
+          include: [Chatroom],
         },
-        { model: Message },
+        {
+          model: Message,
+        },
       ],
     });
     res.status(200).json(userData);
   } catch (err) {
+    console.error(err);
     res.status(500).json(err);
   }
 });
 
 router.post('/', async (req, res) => {
   try {
-    const userData = await User.create(req.body);
+    const userCheck = await User.findOne({
+      where: { username: req.body.username },
+    });
+    if (userCheck) {
+      res.status(400).json({ message: 'Username taken, please try again!' });
+      return;
+    }
+    const newUser = await User.create(req.body);
 
     req.session.save(() => {
-      req.session.user_id = userData.id;
+      req.session.user_id = newUser.id;
       req.session.logged_in = true;
-
-      res.status(200).json(userData);
     });
+    res.status(200).redirect('/logged_in_homepage');
   } catch (err) {
     res.status(400).json(err);
   }
@@ -51,7 +66,9 @@ router.post('/', async (req, res) => {
 
 router.post('/login', async (req, res) => {
   try {
-    const userData = await User.findOne({ where: { email: req.body.email } });
+    const userData = await User.findOne({
+      where: { username: req.body.username },
+    });
 
     if (!userData) {
       res
@@ -76,6 +93,7 @@ router.post('/login', async (req, res) => {
       res.status(200).redirect('/logged_in_homepage');
     });
   } catch (err) {
+    console.error(err);
     res.status(400).json(err);
   }
 });

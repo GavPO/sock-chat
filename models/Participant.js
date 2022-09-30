@@ -19,7 +19,7 @@ Participant.init(
         key: 'id',
       },
     },
-    room_id: {
+    chatroom_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {

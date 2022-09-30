@@ -10,7 +10,6 @@
     <link rel='stylesheet' href='/assets/css/reset.css' />
     <link rel='stylesheet' href='/assets/css/style.css' />
   </head>
-
   <body>
     <header>
         <img src="../assets/socks/blackground.jpg" alt="white striped 80s sock on black background" class="blackground"</img>
@@ -34,13 +33,14 @@
       </main>
       <footer>
 
+
       </footer>
     
 
-    <!-- Render script for logged in users only -->
-    {{#if logged_in}}
-      <script src='/js/logout.js'></script>
-    {{/if}}
+  <!-- Render script for logged in users only -->
+  {{#if logged_in}}
+  <script src="/assets/js/logout.js"></script>
+  {{/if}}
 
     <script src='{{getEnvUrl}}'></script>
     <script> var socket = io(); </script>
